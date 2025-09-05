@@ -16,7 +16,7 @@ class categories_seed extends Seeder
     {
         DB::table('categories')->insert([
 
-            'name'=>'Árboles',
+            'name'=>'Plantas',
             'img'=>'default.jpg',
             'created_at'=>date('Y-m-d h:m:s')
 
