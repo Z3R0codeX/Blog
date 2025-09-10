@@ -13,8 +13,8 @@ return new class extends Migration
     {
        Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
-            $table->Integer('user_id');
-            $table->Integer('post_id');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('post_id')->constrained('posts');
             $table->text('content');
             $table->timestamps();
 
