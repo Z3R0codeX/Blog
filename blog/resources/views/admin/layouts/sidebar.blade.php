@@ -14,17 +14,17 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
              <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/dashboard/post">
                     <i class="fas fa-fw fa-list-alt"></i>
                     <span>Post</span></a>
             </li>
              <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/dashboard/users">
                     <i class="fas fa-fw fa-user-alt"></i>
                     <span>Users</span></a>
             </li>
