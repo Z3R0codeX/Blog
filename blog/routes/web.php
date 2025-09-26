@@ -28,6 +28,7 @@ Route::group([
 });
 
 Route::get("/users", [UsersController::class, "getUsers"]);
+Route::post("/users", [UsersController::class, "createUsers"]);
 });
 
 
