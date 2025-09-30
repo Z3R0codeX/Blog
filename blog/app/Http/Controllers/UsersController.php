@@ -18,9 +18,32 @@ class UsersController extends Controller
 
     }
 
-    public function createUsers(){
+    public function createUsers(request $request){
 
-        dd("si jalo");
+        //dd($request->all());
+
+       $request->validate([
+            'name'=>'required|min:3',
+            'email'=>'required|email|unique:users,email',
+            'pass'=>'required|min:3',
+            'pass2'=>'required|same:pass',
+            'nickname'=>'required|unique:users,nickname'
+        ]);
+
+        $user = new User();
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('pass'));
+        $user->nickname = $request->input('nickname');
+        $user->img = 'default.jpg';
+
+        $user->save();
+
+        return redirect('/dashboard/users')
+        ->with('success','Usuario insertado correctamente');
+
+        
 
     }
 

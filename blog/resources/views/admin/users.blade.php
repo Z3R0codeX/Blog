@@ -11,6 +11,19 @@
   </div>
 </div>
 
+@if(session('success'))
+<div class="alert alert-success">{{session('success')}}</div> @endif
+
+@if($errors->any())
+<div class="alert alert-danger">
+  <ul>
+    @foreach($errors->all() as $error)
+    <li>{{$error}}</li>
+    @endforeach 
+  </ul>
+</div>
+@endif
+
 <div class="p-4">
   <table class="table">
     <thead class="thead-dark">
@@ -37,7 +50,9 @@
         <td>******************</td>
         <td>
 
-          <button class="btn btn-danger">X</button>
+          <button class="btn btn-danger btnEliminar"
+           data-id="{{$item->id}}"
+           data-toggle="modal" data-target="#Modaldelete"><i class="fa fa-trash"></i></button>
 
         </td>
 
@@ -64,22 +79,27 @@
 
           <div class="form-group">
             <label for="exampleInputEmail1">Nombre</label>
-            <input type="text" class="form-control" id="Nombre" aria-describedby="emailHelp">
+            <input value="{{old('name')}}"  name="name" type="text" class="form-control" id="Nombre" aria-describedby="emailHelp">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nombre de usuario</label>
+            <input value="{{old('nickname')}}" name="nickname" type="text" class="form-control" id="Nickname" aria-describedby="nicknameHelp">
           </div>
 
           <div class="form-group">
             <label for="exampleInputEmail1">Email</label>
-            <input type="email" class="form-control" id="Email" aria-describedby="nameHelp">
+            <input value="{{old('email')}}" name="email" type="email" class="form-control" id="Email" aria-describedby="nameHelp">
           </div>
 
           <div class="form-group">
             <label for="exampleInputEmail1">Contraseña</label>
-            <input type="password" class="form-control" id="contraseña" aria-describedby="passwordHelp">
+            <input name="pass" type="password" class="form-control" id="contraseña" aria-describedby="passwordHelp">
           </div>
 
           <div class="form-group">
             <label for="exampleInputEmail1">Confirmar contraseña</label>
-            <input type="password" class="form-control" id="contraseña2" aria-describedby="passwordHelp">
+            <input name="pass2" type="password" class="form-control" id="contraseña2" aria-describedby="passwordHelp">
           </div>
 
         </div>
@@ -94,9 +114,44 @@
   </div>
 </div>
 
+<div class="modal fade" id="Modaldelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form action="/dashboard/users" method="POST">
+        @csrf
+        <div class="modal-body">
+
+            <h2>¿Deseas eliminar el registro?</h2>
+
+        <div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger">Eliminar</button>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>
+
 @endsection
 
 @section('script')
 <script>
   // alert("HOLA")
+  $(document).ready(function(){
+    $(".btnEliminar").on("click",function(event){
+      var id= $(this).data('id')
+      alert(id)
+    });
+  });
 </script>
