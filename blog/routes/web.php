@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,12 +25,12 @@ Route::group([
 
     'prefix'=>'dashboard'], function(){
 
-    Route::get("/", function(){
-    return view('admin.dashboard');
-});
+    Route::resource("/", DashboardController::class);
+    Route::resource("/post", PostController::class);
+    Route::get("/post/actions/add", [PostController::class, "showAdd"]);
 
-Route::get("/users", [UsersController::class, "getUsers"]);
-Route::post("/users", [UsersController::class, "createUsers"]);
+    Route::get("/users", [UsersController::class, "getUsers"]);
+    Route::post("/users", [UsersController::class, "createUsers"]);
 });
 
 
