@@ -22,19 +22,20 @@ Route::get("/about", function(){
 });
 
 Route::group([
+    'prefix'=>'dashboard'
+], function(){
 
-    'prefix'=>'dashboard'], function(){
+    
+    Route::get("/post/actions/add", [PostController::class, "showAdd"])->name('admin.posts.add');
 
-    Route::resource("/", DashboardController::class);
-    Route::resource("/post", PostController::class);
-    Route::get("/post/actions/add", [PostController::class, "showAdd"]);
+    Route::resource("/post", PostController::class)->except(['create']);
+    
+
+    Route::resource("/", DashboardController::class)->only(['index']);
 
     Route::get("/users", [UsersController::class, "getUsers"]);
     Route::post("/users", [UsersController::class, "createUsers"]);
 });
-
-
-
 
 
 Auth::routes();
